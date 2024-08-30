@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Investment Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Investment Calculator</h1>
+
+    <label for="investmentAmount">Investment Amount:</label>
+    <input type="number" id="investmentAmount" placeholder="Enter amount">
+
+    <label for="interestRate">Annual Interest Rate (%):</label>
+    <input type="number" id="interestRate" placeholder="Enter rate">
+
+    <label for="investmentYears">Investment Years:</label>
+    <input type="number" id="investmentYears" placeholder="Enter years">
+
+    <button id="calculateButton">Calculate</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const investmentAmountInput = document.getElementById('investmentAmount');
+    const interestRateInput = document.getElementById('interestRate');
+    const investmentYearsInput = document.getElementById('investmentYears');
+    const calculateButton = document.getElementById('calculateButton');
+    const resultDiv = document.getElementById('result');
+
+    calculateButton.addEventListener('click', () => {
+      const investmentAmount = parseFloat(investmentAmountInput.value);
+      const interestRate = parseFloat(interestRateInput.value) / 100; // Convert percentage to decimal
+      const investmentYears = parseFloat(investmentYearsInput.value);
+
+      if (isNaN(investmentAmount) || isNaN(interestRate) || isNaN(investmentYears)) {
+        resultDiv.textContent = "Please enter valid numbers for all fields.";
+        return;
+      }
+
+      const futureValue = investmentAmount * Math.pow(1 + interestRate, investmentYears);
+      resultDiv.textContent = `Your estimated future value: $${futureValue.toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>
